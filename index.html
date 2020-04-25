@@ -1,0 +1,33 @@
+<html>
+    <head>
+      <meta charset="utf-8">
+      <link href="/dist/d3-geomap.css" rel="stylesheet">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <style>
+        path {
+          fill: #ccc;
+          stroke: #fff;
+          stroke-width: .5px;
+        }
+
+        path:hover {
+          fill: red;
+        }
+
+        button {
+          background: lightblue;
+          font-size: 16px;
+        }
+      </style>
+    </head>
+    <body>
+      <button onclick="redrawMap('states')">Show states (default)</button>
+      <button onclick="redrawMap('counties')">Show counties</button>
+      <button onclick="redrawMap('berlin')">Show Berlin districts</button>
+
+      <div class="d3-geomap" id="map"></div>
+    </body>
+    <script src="//d3js.org/d3.v3.min.js"></script>
+    <script src="//d3js.org/topojson.v1.min.js"></script>
+    <script src="./map.js"></script>
+</html>
