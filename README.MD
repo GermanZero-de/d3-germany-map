@@ -8,7 +8,6 @@ To run this locally you have to run some local server eg. with python `python -m
 
 ## Next TODOs:
 
-- redraw map on resize
 - colorize counties / districts by data
 - zoom in functionality
 - integrate berlin districts data into counties data?

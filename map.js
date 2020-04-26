@@ -1,7 +1,9 @@
 // Good article describing the process: https://bost.ocks.org/mike/map/
 
 // dataSelector is used for specifying what borders should be shown
-function drawMap({ dataSelector = 'states' }) {
+let mapDataSelector = 'states'
+
+function drawMap() {
   const selector = '#map';
   document.querySelector(selector).innerHTML = "" // clear map content
 
@@ -27,7 +29,7 @@ function drawMap({ dataSelector = 'states' }) {
     // const counties = topojson.feature(topology, topology.objects.counties); // detailed data
     // const berlin = topojson.feature(topology, topology.objects.berlin); // berlin districts data
 
-    const mapDetails = topojson.feature(topology, topology.objects[dataSelector]);
+    const mapDetails = topojson.feature(topology, topology.objects[mapDataSelector]);
 
     // projection needs some work for better positioning
     const projection = d3.geo.albers()
@@ -48,9 +50,14 @@ function drawMap({ dataSelector = 'states' }) {
   });
 }
 
-drawMap({ dataSelector: 'states' })
+drawMap()
 
 function redrawMap(selection) {
   console.log('redraw with', selection)
-  drawMap({ dataSelector: selection })
+  mapDataSelector = selection
+  drawMap()
 }
+
+window.addEventListener('resize', function(event){
+  drawMap()
+});
