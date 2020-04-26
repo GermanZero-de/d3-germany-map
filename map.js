@@ -8,8 +8,8 @@ function drawMap({ dataSelector = 'states' }) {
   // this is calculating some variables based on container size
   const bbox = d3.select(selector).node().getBoundingClientRect();
   const width = bbox.width;
-  const height = 1.2 * bbox.width;
-  const scale = [4.84 * width];
+  const height = 1.3 * bbox.width;
+  const scale = [9.5 * width];
   const translate = [width / 2, height / 2]
 
   // setting up the svg
@@ -31,7 +31,7 @@ function drawMap({ dataSelector = 'states' }) {
 
     // projection needs some work for better positioning
     const projection = d3.geo.albers()
-      .center([10.6, 51.3])
+      .center([12.6, 51.2])
       .rotate([2, 0])
       .parallels([50, 60])
       .scale(scale)
