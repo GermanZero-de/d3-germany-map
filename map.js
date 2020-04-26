@@ -25,10 +25,6 @@ function drawMap() {
   d3.json(url, function(error, topology) {
     if (error) throw error;
 
-    // const states =  // states data
-    // const counties = topojson.feature(topology, topology.objects.counties); // detailed data
-    // const berlin = topojson.feature(topology, topology.objects.berlin); // berlin districts data
-
     const mapDetails = topojson.feature(topology, topology.objects[mapDataSelector]);
 
     // projection needs some work for better positioning
@@ -47,6 +43,8 @@ function drawMap() {
       .data(mapDetails.features)
       .enter().append("path")
       .attr("d", path);
+
+    addZoomFunctionality()
   });
 }
 
@@ -61,3 +59,21 @@ function redrawMap(selection) {
 window.addEventListener('resize', function(event){
   drawMap()
 });
+
+// testing zoom in ->
+function addZoomFunctionality() {
+  const mapElem = document.querySelector('#map')
+  const berlinElem = document.querySelector('#map svg path:nth-child(3)') // todo use class
+
+  // add zoom for berlin
+  berlinElem.addEventListener('click', function() {
+    mapElem.classList.toggle('berlin'); // zooms in with css
+    mapElem.classList.toggle('zoomed');
+
+    // wait a second and then renderes state data
+    setTimeout(function () {
+        mapDataSelector = 'berlin'
+        drawMap()
+    }, 1000);
+  });
+}

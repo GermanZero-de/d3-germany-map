@@ -9,8 +9,8 @@ To run this locally you have to run some local server eg. with python `python -m
 ## Next TODOs:
 
 - colorize counties / districts by data
-- zoom in functionality
-- integrate berlin districts data into counties data?
+- zoom in functionality (Started on this for Berlin)
+- separate counties data by state
 - add some webpack stuff for old browser compability
 
 

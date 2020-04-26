@@ -7,13 +7,26 @@ let selector = '#map',
     height = 1.2 * bbox.width,
     scale = [4.84 * width],
     tr = [-width / 2.7, 4.68 * height],
-    map = d3.choropleth().geofile('/d3-geomap/topojson/countries/DEU.json').projection(d3.geoMercator).unitId('fips').column('Foreign Population Percentage').colors(d3.schemeYlOrRd[9]).legend(!0).width(width).height(height).scale(scale).translate(tr).postUpdate(annotate);
-d3.csv('/data/deu-foreign-population.csv').then((a) => {
-    map.draw(d3.select(selector).datum(a)), table(a, '#table-body', ['State', 'Foreign Population', 'Foreign Population Percentage']), $('.table').DataTable({
-        paging: !1,
-        searching: !1,
-        info: !1
-    })
+    map = d3
+        .choropleth()
+        .geofile('/d3-geomap/topojson/countries/DEU.json')
+        .projection(d3.geoMercator)
+        .unitId('fips')
+        .column('Foreign Population Percentage')
+        .colors(d3.schemeYlOrRd[9])
+        .legend(!0)
+        .width(width)
+        .height(height)
+        .scale(scale)
+        .translate(tr)
+        .postUpdate(annotate);
+
+    d3.csv('/data/deu-foreign-population.csv').then((a) => {
+        map.draw(d3.select(selector).datum(a)), table(a, '#table-body', ['State', 'Foreign Population', 'Foreign Population Percentage']), $('.table').DataTable({
+            paging: !1,
+            searching: !1,
+            info: !1
+        })
 });
 
 function annotate() {

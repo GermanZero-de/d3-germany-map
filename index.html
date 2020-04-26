@@ -12,11 +12,25 @@
 
         path:hover {
           fill: red;
+          cursor: pointer;
         }
 
         button {
           background: lightblue;
           font-size: 16px;
+        }
+
+        #map {
+          overflow: hidden;
+        }
+
+        #map svg {
+          overflow: hidden;
+          transition: 1s ease-in-out;
+        }
+
+        .berlin svg {
+          transform: scale(10) translateX(-24%) translateY(20%);
         }
       </style>
     </head>
@@ -31,5 +45,6 @@
     </body>
     <script src="//d3js.org/d3.v3.min.js"></script>
     <script src="//d3js.org/topojson.v1.min.js"></script>
+    <script src="./dist/d3-geomap.min.js"></script>
     <script src="./map.js"></script>
 </html>
