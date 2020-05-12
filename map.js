@@ -3,7 +3,7 @@
 // dataSelector is used for specifying what borders should be shown
 let mapDataSelector = 'states'
 
-function drawMap() {
+function drawMap(filter) {
   const selector = '#map';
   document.querySelector(selector).innerHTML = "" // clear map content
 
@@ -25,7 +25,14 @@ function drawMap() {
   d3.json(url, function(error, topology) {
     if (error) throw error;
 
-    const mapDetails = topojson.feature(topology, topology.objects[mapDataSelector]);
+    const mapSelector = filter ? 'counties' : 'states'
+    const mapDetails = topojson
+      .feature(topology, topology.objects[mapSelector])
+
+    if (filter) {
+      mapDetails.features = mapDetails.features.filter(f => f.properties.state === filter) // filter = state name
+      console.log(mapDetails.features)
+    }
 
     // projection needs some work for better positioning
     const projection = d3.geo.albers()
@@ -50,19 +57,13 @@ function drawMap() {
 
 drawMap()
 
-function redrawMap(selection) {
-  console.log('redraw with', selection)
-  mapDataSelector = selection
-  drawMap()
-}
-
 window.addEventListener('resize', function(event){
   drawMap()
 });
 
 // testing zoom in ->
 function addZoomFunctionality() {
-  const mapElem = document.querySelector('#map')
+  /* const mapElem = document.querySelector('#map')
   const berlinElem = document.querySelector('#map svg path:nth-child(3)') // todo use class
 
   // add zoom for berlin
@@ -75,5 +76,18 @@ function addZoomFunctionality() {
         mapDataSelector = 'berlin'
         drawMap()
     }, 1000);
+  }); */
+
+  const stateSvgPosition = [
+    'Baden-Württemberg', 'Bayern', 'Berlin', 'Brandenburg', 'Bremen', 'Hamburg',
+    'Hessen', 'Mecklenburg-Vorpommern', 'Niedersachsen', 'Nordrhein-Westfalen',
+    'Rheinland-Pfalz', 'Saarland', 'Sachsen-Anhalt', 'Sachsen', 'Schleswig-Holstein',
+    'Thüringen'
+  ]
+  stateSvgPosition.forEach(function (state, index) {
+    const stateElem = document.querySelector(`#map svg path:nth-child(${index + 1})`)
+    stateElem.addEventListener('click', function() {
+      drawMap(state)
+    })
   });
 }

@@ -8,6 +8,7 @@ To run this locally you have to run some local server eg. with python `python -m
 
 ## Next TODOs:
 
+- figure out why berlin districts are not shown on click
 - colorize counties / districts by data
 - zoom in functionality (Started on this for Berlin)
 - separate counties data by state

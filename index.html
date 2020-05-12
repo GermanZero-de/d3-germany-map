@@ -15,11 +15,6 @@
           cursor: pointer;
         }
 
-        button {
-          background: lightblue;
-          font-size: 16px;
-        }
-
         #map {
           overflow: hidden;
         }
@@ -35,10 +30,6 @@
       </style>
     </head>
     <body>
-      <button onclick="redrawMap('states')">Show states (default)</button>
-      <button onclick="redrawMap('counties')">Show counties</button>
-      <button onclick="redrawMap('berlin')">Show Berlin districts</button>
-
       <a href="https://github.com/Vincenius/d3-germany-map">GitHub Repository</a>
 
       <div class="d3-geomap" id="map"></div>
